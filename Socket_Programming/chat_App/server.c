@@ -15,8 +15,8 @@ void error(const char *msg){
 int main(int argc,char *argv[]){ 
 
 	if(argc < 2){
-		fprintf(stderr,"Port Number not provided,Program terminated!!\n");
-		exit(1);
+		fprintf(stderr,"Port Number not provided, Program terminated!!\n");
+		exit(1); 
 	}
 
 	int sockfd, newsockfd, portno, n;
