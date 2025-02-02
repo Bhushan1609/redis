@@ -68,7 +68,7 @@ int main(int argc,char *argv[]){
 			error("Error on Writing");
 		}
 
-		if(strcmp("Bye", buffer, 3)==0){
+		if(strncmp("Bye", buffer, 3)==0){
 			break;
 		}
 	}
