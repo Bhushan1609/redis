@@ -7,20 +7,16 @@
 #include<netinet/in.h>
 
 void error(const char *msg){
-
 	perror(msg);
 	exit(1);
-
 }
 
 
 int main(int argc,char *argv[]){ 
 
 	if(argc < 2){
-
 		fprintf(stderr,"Port Number not provided,Program terminated!!\n");
 		exit(1);
-
 	}
 
 	int sockfd, newsockfd, portno, n;
@@ -72,14 +68,13 @@ int main(int argc,char *argv[]){
 			error("Error on Writing");
 		}
 
-		if(strcmp("Bye", buffer)==0){
+		if(strcmp("Bye", buffer, 3)==0){
 			break;
 		}
-
-		close(newsockfd);
-		close(sockfd);
-		return 0;
 	}
+	close(newsockfd);
+	close(sockfd);
+	return 0;
 }
 
 /*
