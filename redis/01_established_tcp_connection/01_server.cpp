@@ -38,33 +38,29 @@ int main() {
         die("socket()");
     }
 
-    // this is needed for most server applications
     int val = 1;
-    setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
+    setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val)); //in case server crash so the address need to reuse
 
-    // bind
     struct sockaddr_in addr = {};
     addr.sin_family = AF_INET;
     addr.sin_port = ntohs(1234);
-    addr.sin_addr.s_addr = ntohl(0);    // wildcard address 0.0.0.0
+    addr.sin_addr.s_addr = ntohl(0); 
     int rv = bind(fd, (const sockaddr *)&addr, sizeof(addr));
     if (rv) {
         die("bind()");
     }
 
-    // listen
     rv = listen(fd, SOMAXCONN);
     if (rv) {
         die("listen()");
     }
 
     while (true) {
-        // accept
         struct sockaddr_in client_addr = {};
         socklen_t socklen = sizeof(client_addr);
         int connfd = accept(fd, (struct sockaddr *)&client_addr, &socklen);
         if (connfd < 0) {
-            continue;   // error
+            continue;   
         }
 
         do_something(connfd);
